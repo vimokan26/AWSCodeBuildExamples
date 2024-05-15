@@ -17,4 +17,5 @@ phases:
       - echo "Build completed"
 artifacts:
   files:
-    - target/messageUtil-1.0.jar
+    - target/messageUtil-1.0.jar 
+    - echo "application artifact has been generated and posted to S3"
