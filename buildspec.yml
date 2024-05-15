@@ -6,7 +6,8 @@ phases:
       java: corretto11
   pre_build:
     commands:
-      - echo "Starting prebuild phase"
+      - echo "Starting prebuild phase; Compiling project"
+      - mvn compile
   build:
     commands:
       - echo "Installing maven for code compilation, run test and package code for deployment"
@@ -14,8 +15,16 @@ phases:
       - codebuild-breakpoint
   post_build:
     commands:
-      - echo "Build completed"
+      - echo "Build completed, Initiating unit tests"
+      - mvn test
+      - echo "Completed Unit test cases"
 artifacts:
   files:
     - target/messageUtil-1.0.jar 
     - echo "application artifact has been generated and posted to S3"
+reports:
+  unittests:
+    files:
+      - "**/TEST-*.xml"
+    base-directory: "tests/reports"
+    
